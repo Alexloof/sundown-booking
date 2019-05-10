@@ -21,13 +21,17 @@ export default () => createGlobalStyle`
 html {
   font-family: 'Helvetica Neue';
   font-size: 16px;
-  
+
   body ::-webkit-scrollbar {
     width: 7px;
   }
 
   body ::-webkit-scrollbar-track {
     background: transparent;
+  }
+
+  li {
+    list-style: none;
   }
 }
 
