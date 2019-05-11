@@ -11,7 +11,7 @@ const Home: React.FC = memo(() => {
 
   useEffect(() => {
     refreshOrder()
-  }, [])
+  }, [refreshOrder])
 
   return (
     <Wrapper>

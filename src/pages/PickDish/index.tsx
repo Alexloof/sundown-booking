@@ -16,7 +16,7 @@ const PickDish = observer(({ history, location }: IProps) => {
 
   useEffect(() => {
     !update && generateDish()
-  }, [])
+  }, [generateDish, update])
 
   return (
     <>
@@ -51,13 +51,13 @@ const Wrapper = styled.div`
 
 const FoodWrapper = styled.div`
   width: 60%;
-  height: 450px;
 `
 
 const Image = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
+  height: 450px;
 `
 
 const Title = styled.h2`

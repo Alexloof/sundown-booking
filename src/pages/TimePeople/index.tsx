@@ -82,6 +82,7 @@ const TimePeople = observer(({ history, location }: IProps) => {
               value={email}
               onChange={e => setEmail(e.currentTarget.value)}
               type="email"
+              required
               placeholder="Enter an email for your order..."
             />
             <Button style={{ marginTop: '40px' }}>

@@ -34,6 +34,7 @@ const FindOrder = memo(({ history }: IProps) => {
           value={email}
           onChange={e => setEmail(e.currentTarget.value)}
           type="email"
+          required
           placeholder="Type an email address to find your order..."
           style={{ marginBottom: '20px' }}
         />

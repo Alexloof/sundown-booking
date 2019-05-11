@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { useTrail, animated } from 'react-spring'
 import { observer } from 'mobx-react-lite'
 
-const config = { mass: 5, tension: 2000, friction: 200 }
+const config = { mass: 5, tension: 3000, friction: 200 }
 
 interface IProps {
   availableDrinks: any[]
@@ -16,8 +16,8 @@ const DrinksList = observer(({ availableDrinks }: IProps) => {
   const trail = useTrail(availableDrinks.length, {
     config,
     opacity: 1,
-    transform: 'translateY(0px)',
-    from: { opacity: 0, transform: 'translateY(-25px)' }
+    maxHeight: '200px',
+    from: { opacity: 0, maxHeight: '0px' }
   })
 
   return (
@@ -28,7 +28,7 @@ const DrinksList = observer(({ availableDrinks }: IProps) => {
         return (
           <Drink
             key={drink.id}
-            className={isPicked ? 'picked' : 'nope'}
+            className={isPicked ? 'picked' : ''}
             onClick={() => toggleDrink(drink.id)}
             style={{ ...props }}
           >
@@ -57,6 +57,7 @@ const Drink = styled(animated.div)`
   cursor: pointer;
   border-radius: 10px;
   transition: 0.2s background ease;
+  overflow: hidden;
   &.picked {
     background: ${props => props.theme.colors.secondary + '26'};
   }
@@ -66,6 +67,7 @@ const Image = styled.img`
   height: 100%;
   width: 100%;
   object-fit: contain;
+  transition: 0.2s height ease;
 `
 
 const Name = styled.p`

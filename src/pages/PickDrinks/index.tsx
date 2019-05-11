@@ -17,7 +17,7 @@ const PickDrinks = observer(({ history, location }: IProps) => {
 
   useEffect(() => {
     fetchDrinks()
-  }, [])
+  }, [fetchDrinks])
 
   const handleNext = () => {
     if (drinks.length > 0) {

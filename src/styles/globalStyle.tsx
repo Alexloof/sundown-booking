@@ -21,6 +21,7 @@ export default () => createGlobalStyle`
 html {
   font-family: 'Helvetica Neue';
   font-size: 16px;
+  margin-left: calc(100vw - 100%); 
 
   body ::-webkit-scrollbar {
     width: 7px;
@@ -44,6 +45,7 @@ html {
 
   /* custom style for date-time picker */
   .datetime-custom {
+    width: 320px;
     .calendar table thead th {
       color: ${props => props.theme.colors.primary};
     }
