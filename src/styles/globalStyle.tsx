@@ -29,7 +29,7 @@ html {
 
   body ::-webkit-scrollbar-track {
     background: rgba(0,0,0,.1);
-    border-radius: 0;
+    border-radius: 5px;
   }
 
   body ::-webkit-scrollbar-thumb {

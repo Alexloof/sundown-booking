@@ -1,7 +1,8 @@
-import { observable, action, computed } from 'mobx'
+import { observable, action } from 'mobx'
 import React from 'react'
 import axios from 'axios'
 import { Moment } from 'moment'
+import { toast } from 'react-toastify'
 
 interface IDish {
   title: string
@@ -35,19 +36,13 @@ class OrderStore {
   public availableDrinks: IDrink[] = []
 
   @action
-  public setPeople = (nbrOfPeople: number) => {
-    this.nbrOfPeople = nbrOfPeople
-  }
+  public setPeople = (nbrOfPeople: number) => (this.nbrOfPeople = nbrOfPeople)
 
   @action
-  public setTime = (time: Moment) => {
-    this.time = time.toISOString()
-  }
+  public setTime = (time: Moment) => (this.time = time.toISOString())
 
   @action
-  public setEmail = (email: string) => {
-    this.email = email
-  }
+  public setEmail = (email: string) => (this.email = email)
 
   @action
   public toggleDrink = (id: string) => {
@@ -58,11 +53,8 @@ class OrderStore {
     }
   }
 
-  public getDrinkDetails = (drinkId: string) => {
-    return computed(() => {
-      return this.availableDrinks.find(drink => drink.id === drinkId)
-    }).get()
-  }
+  public getDrinkDetails = (drinkId: string) =>
+    this.availableDrinks.find(drink => drink.id === drinkId)
 
   public saveOrder = () => {
     const order = {
@@ -115,7 +107,9 @@ class OrderStore {
         img: drink.image_url
       }))
     } catch (error) {
-      console.log({ error })
+      toast('🤨 Could not load drinks... Try again later!', {
+        type: toast.TYPE.ERROR
+      })
     }
   }
 
@@ -133,7 +127,9 @@ class OrderStore {
         }
       }
     } catch (error) {
-      console.log({ error })
+      toast('🤨 Could not generate a dish... Try again later!', {
+        type: toast.TYPE.ERROR
+      })
     }
   }
 }

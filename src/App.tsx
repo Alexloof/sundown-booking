@@ -7,6 +7,8 @@ import styled, { ThemeProvider } from 'styled-components'
 import theme from './styles/theme'
 import Routes from './Routes'
 import Navigation from './components/Navigation'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const GlobalStyle = globalStyle()
 
@@ -17,6 +19,7 @@ const App: React.FC = () => {
         <ThemeProvider theme={theme}>
           <Container>
             <GlobalStyle />
+            <ToastContainer />
             <Navigation />
             <Routes />
           </Container>

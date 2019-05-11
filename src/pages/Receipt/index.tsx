@@ -6,6 +6,7 @@ import { OrderStoreContext } from '../../stores/orderStore'
 import { RouteComponentProps } from 'react-router-dom'
 import moment from 'moment'
 import { observer } from 'mobx-react-lite'
+import { toast } from 'react-toastify'
 
 interface IProps extends RouteComponentProps {}
 
@@ -21,8 +22,12 @@ const Receipt = observer(({ history }: IProps) => {
 
   useEffect(() => {
     if (!dish || !email || !nbrOfPeople || !time || drinks.length === 0) {
-      history.push('/')
+      return history.push('/')
     }
+
+    toast('🤗 Your order has been saved!', {
+      type: toast.TYPE.SUCCESS
+    })
   }, [dish, email, nbrOfPeople, time, drinks.length, history])
 
   return (
