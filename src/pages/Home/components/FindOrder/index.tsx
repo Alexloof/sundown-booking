@@ -5,6 +5,7 @@ import Input from '../../../../components/Input'
 import InputLabel from '../../../../components/InputLabel'
 import { OrderStoreContext } from '../../../../stores/orderStore'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 interface IProps extends RouteComponentProps {}
 
@@ -20,7 +21,9 @@ const FindOrder = memo(({ history }: IProps) => {
     if (orderExist) {
       history.push('/pick-dish?update=true')
     } else {
-      console.log('order does not exist')
+      toast('☹️ Could not find a order...', {
+        type: toast.TYPE.ERROR
+      })
       setEmail('')
     }
   }
@@ -34,7 +37,8 @@ const FindOrder = memo(({ history }: IProps) => {
           value={email}
           onChange={e => setEmail(e.currentTarget.value)}
           type="email"
-          placeholder="Type an email address to find your order..."
+          required
+          placeholder="Enter an email to find your order..."
           style={{ marginBottom: '20px' }}
         />
         <Button>Find</Button>

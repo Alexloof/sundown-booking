@@ -16,7 +16,9 @@ import { RouteComponentProps } from 'react-router'
 import queryString from 'query-string'
 import validateTime from '../../utils/validateTime'
 import { observer } from 'mobx-react-lite'
+import { toast } from 'react-toastify'
 
+// generates "nbr of people" pages for the carousel
 const pages = Array(10)
   .fill(0)
   .map((_, index) => {
@@ -31,10 +33,10 @@ const TimePeople = observer(({ history, location }: IProps) => {
   const { update } = queryString.parse(location.search)
   const orderStore = useContext(OrderStoreContext)
 
+  const [email, setEmail] = useState(orderStore.email || '')
   const [time, setTime] = useState(
     orderStore.time ? moment(orderStore.time) : moment()
   )
-  const [email, setEmail] = useState(orderStore.email || '')
 
   const onNewNumberOfPeople = (index: number) => {
     orderStore.setPeople(index + 1)
@@ -42,14 +44,21 @@ const TimePeople = observer(({ history, location }: IProps) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
     const isTimeValid = validateTime(time)
+
     if (isTimeValid) {
       orderStore.setTime(time)
       orderStore.setEmail(email)
       orderStore.saveOrder()
       history.push('/receipt')
     } else {
-      console.log('check time')
+      toast(
+        'Sundown is open from 16:00 - 23:00 during weekdays. Pick another time 😊',
+        {
+          type: toast.TYPE.ERROR
+        }
+      )
     }
   }
 
@@ -82,6 +91,7 @@ const TimePeople = observer(({ history, location }: IProps) => {
               value={email}
               onChange={e => setEmail(e.currentTarget.value)}
               type="email"
+              required
               placeholder="Enter an email for your order..."
             />
             <Button style={{ marginTop: '40px' }}>

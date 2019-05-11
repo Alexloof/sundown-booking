@@ -16,18 +16,23 @@ const PickDish = observer(({ history, location }: IProps) => {
 
   useEffect(() => {
     !update && generateDish()
-  }, [])
+  }, [generateDish, update])
 
   return (
     <>
       <Heading>Pick a dish</Heading>
       <Wrapper>
-        <FoodWrapper>
-          <Image src={dish.img} />
-          <Title>{dish.title}</Title>
-          <Desc>{dish.desc}</Desc>
+        <DishWrapper>
+          <Dish>
+            <Image src={dish.img} />
+            <Content>
+              <Title>{dish.title}</Title>
+              <Desc>{dish.desc && dish.desc.slice(0, 270)}...</Desc>
+            </Content>
+          </Dish>
+
           <Button onClick={() => generateDish()}>Generate new dish</Button>
-        </FoodWrapper>
+        </DishWrapper>
         <ComingUpBox>
           <h3>Pick some drinks next</h3>
           <Button
@@ -49,9 +54,23 @@ const Wrapper = styled.div`
   display: flex;
 `
 
-const FoodWrapper = styled.div`
+const DishWrapper = styled.div`
   width: 60%;
+`
+const Dish = styled.div`
+  position: relative;
   height: 450px;
+  margin-bottom: 30px;
+`
+
+const Content = styled.div`
+  position: absolute;
+  bottom: 0;
+  background: linear-gradient(to top, black 30%, transparent 100%);
+  padding: 20px;
+  color: white;
+  height: 200px;
+  padding-top: 80px;
 `
 
 const Image = styled.img`
@@ -61,16 +80,13 @@ const Image = styled.img`
 `
 
 const Title = styled.h2`
-  margin: 20px 0px;
+  margin-bottom: 10px;
 `
 
 const Desc = styled.div`
   font-size: 14px;
-  margin-bottom: 20px;
-  max-height: 120px;
-  min-height: 120px;
-  overflow-y: auto;
 `
+
 const ComingUpBox = styled.div`
   width: 30%;
   margin-left: 10%;

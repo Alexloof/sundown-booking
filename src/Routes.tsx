@@ -13,10 +13,14 @@ const Routes = () => {
   const { location } = useContext(__RouterContext)
   const transitions = useTransition(location, location => location.pathname, {
     config: config.stiff,
-    initial: { opacity: 1 },
-    from: { opacity: 0, transform: 'translateY(-50px)' },
-    enter: { opacity: 1, transform: 'translateY(0px)' },
-    leave: { opacity: 0, transform: 'translateY(50px)', position: 'absolute' }
+    initial: { opacity: 0 },
+    from: { opacity: 0, transform: 'translate3d(0px, -50px, 0px)' },
+    enter: { opacity: 1, transform: 'translate3d(0px, 0px, 0px)' },
+    leave: {
+      opacity: 0,
+      transform: 'translate3d(0px, 50px, 0px)',
+      position: 'absolute'
+    }
   })
 
   return (

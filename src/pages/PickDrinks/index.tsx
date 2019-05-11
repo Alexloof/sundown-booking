@@ -7,6 +7,7 @@ import { RouteComponentProps } from 'react-router-dom'
 import Heading from '../../components/Heading'
 import queryString from 'query-string'
 import DrinksList from './DrinksList'
+import { toast } from 'react-toastify'
 
 interface IProps extends RouteComponentProps {}
 
@@ -17,13 +18,15 @@ const PickDrinks = observer(({ history, location }: IProps) => {
 
   useEffect(() => {
     fetchDrinks()
-  }, [])
+  }, [fetchDrinks])
 
   const handleNext = () => {
     if (drinks.length > 0) {
       history.push(`/time-people${update ? '?update=true' : ''}`)
     } else {
-      // TODO: notification
+      toast('🤨 You must pick at least 1 drink', {
+        type: toast.TYPE.ERROR
+      })
     }
   }
 

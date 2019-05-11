@@ -24,25 +24,10 @@ const Carousel = memo(
     const [index, set] = useState(startIndex || 0)
     const [forwards, setForwards] = useState(true)
 
-    useEffect(() => {
-      if (autoSlide) {
-        const interval = setInterval(() => {
-          rightClick()
-        }, intervalTime)
-        return () => {
-          clearInterval(interval)
-        }
-      }
-    }, [])
-
-    useEffect(() => {
-      onNewActiveIndex && onNewActiveIndex(index)
-    }, [index])
-
     const rightClick = useCallback(() => {
       setForwards(true)
       set(state => (state + 1) % pages.length)
-    }, [])
+    }, [pages.length])
 
     const leftClick = useCallback(() => {
       setForwards(false)
@@ -53,7 +38,22 @@ const Carousel = memo(
         }
         return (state - 1) % pages.length
       })
-    }, [])
+    }, [pages.length])
+
+    useEffect(() => {
+      if (autoSlide) {
+        const interval = setInterval(() => {
+          rightClick()
+        }, intervalTime)
+        return () => {
+          clearInterval(interval)
+        }
+      }
+    }, [autoSlide, rightClick, intervalTime])
+
+    useEffect(() => {
+      onNewActiveIndex && onNewActiveIndex(index)
+    }, [index, onNewActiveIndex])
 
     const transitions = useTransition(index, p => p, {
       initial: { opacity: 1 },

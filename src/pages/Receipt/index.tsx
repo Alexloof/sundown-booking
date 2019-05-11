@@ -1,11 +1,12 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Heading from '../../components/Heading'
 import styled from 'styled-components'
 import Button from '../../components/Button'
 import { OrderStoreContext } from '../../stores/orderStore'
-import { RouteComponentProps, Redirect } from 'react-router-dom'
+import { RouteComponentProps } from 'react-router-dom'
 import moment from 'moment'
 import { observer } from 'mobx-react-lite'
+import { toast } from 'react-toastify'
 
 interface IProps extends RouteComponentProps {}
 
@@ -19,9 +20,15 @@ const Receipt = observer(({ history }: IProps) => {
     getDrinkDetails
   } = useContext(OrderStoreContext)
 
-  if (!dish || !email || !nbrOfPeople || !time || drinks.length === 0) {
-    return <Redirect to="/" />
-  }
+  useEffect(() => {
+    if (!dish || !email || !nbrOfPeople || !time || drinks.length === 0) {
+      return history.push('/')
+    }
+
+    toast('🤗 Your order has been saved!', {
+      type: toast.TYPE.SUCCESS
+    })
+  }, [dish, email, nbrOfPeople, time, drinks.length, history])
 
   return (
     <>
