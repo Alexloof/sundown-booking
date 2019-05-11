@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
 import { animated, AnimatedValue } from 'react-spring'
 import Carousel from '../../../../components/Carousel'
@@ -24,13 +24,13 @@ const pages = [
   )
 ]
 
-const HomeCarousel: React.FC = () => {
+const HomeCarousel: React.FC = memo(() => {
   return (
     <Wrapper>
-      <Carousel pages={pages} intervalTime={8000} autoSlide />
+      <Carousel pages={pages} intervalTime={5000} autoSlide />
     </Wrapper>
   )
-}
+})
 
 export default HomeCarousel
 

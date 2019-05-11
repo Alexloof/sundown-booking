@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
 
-const ContentBox = () => {
+const ContentBox = memo(() => {
   return (
     <Wrapper>
       <h2>We love making tasty food</h2>
@@ -13,7 +13,7 @@ const ContentBox = () => {
       </p>
     </Wrapper>
   )
-}
+})
 
 export default ContentBox
 

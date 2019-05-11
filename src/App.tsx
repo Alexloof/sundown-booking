@@ -14,9 +14,9 @@ const App: React.FC = () => {
   return (
     <Provider {...stores}>
       <BrowserRouter>
-        <GlobalStyle />
         <ThemeProvider theme={theme}>
           <Container>
+            <GlobalStyle />
             <Navigation />
             <Routes />
           </Container>
@@ -31,6 +31,6 @@ export default App
 const Container = styled.main`
   max-width: 1100px;
   margin: 0 auto;
-  height: 100vh;
   padding: 0px 20px;
+  min-height: 100vh;
 `

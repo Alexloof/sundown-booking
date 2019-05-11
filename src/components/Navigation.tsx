@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { ReactComponent as Logo } from '../assets/images/logo.svg'
 import styled from 'styled-components'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 
 interface IProps extends RouteComponentProps {}
 
-const Navigation = ({ history }: IProps) => {
+const Navigation = memo(({ history }: IProps) => {
   return (
     <Wrapper>
       <StyledLogo
@@ -22,7 +22,7 @@ const Navigation = ({ history }: IProps) => {
       </List>
     </Wrapper>
   )
-}
+})
 
 export default withRouter(Navigation)
 

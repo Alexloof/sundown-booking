@@ -1,18 +1,18 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
 import Button from '../../../../components/Button'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 
 interface IProps extends RouteComponentProps {}
 
-const OrderBox = ({ history }: IProps) => {
+const OrderBox = memo(({ history }: IProps) => {
   return (
     <Wrapper>
       <h2>Start your order now!</h2>
       <Button onClick={() => history.push('/pick-dish')}>Order</Button>
     </Wrapper>
   )
-}
+})
 
 export default withRouter(OrderBox)
 

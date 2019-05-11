@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, memo } from 'react'
 import styled from 'styled-components'
 import Button from '../../../../components/Button'
 import Input from '../../../../components/Input'
@@ -8,7 +8,7 @@ import { withRouter, RouteComponentProps } from 'react-router-dom'
 
 interface IProps extends RouteComponentProps {}
 
-const FindOrder = ({ history }: IProps) => {
+const FindOrder = memo(({ history }: IProps) => {
   const { hydrateOrder } = useContext(OrderStoreContext)
 
   const [email, setEmail] = useState('')
@@ -41,7 +41,7 @@ const FindOrder = ({ history }: IProps) => {
       </form>
     </Wrapper>
   )
-}
+})
 
 export default withRouter(FindOrder)
 

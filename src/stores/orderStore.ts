@@ -50,8 +50,12 @@ class OrderStore {
   }
 
   @action
-  public pickDrink = (id: string) => {
-    this.drinks.push(id)
+  public toggleDrink = (id: string) => {
+    if (this.drinks.includes(id)) {
+      this.drinks = this.drinks.filter(drinkId => drinkId !== id)
+    } else {
+      this.drinks.push(id)
+    }
   }
 
   public getDrinkDetails = (drinkId: string) => {

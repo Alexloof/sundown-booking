@@ -15,6 +15,7 @@ import { OrderStoreContext } from '../../stores/orderStore'
 import { RouteComponentProps } from 'react-router'
 import queryString from 'query-string'
 import validateTime from '../../utils/validateTime'
+import { observer } from 'mobx-react-lite'
 
 const pages = Array(10)
   .fill(0)
@@ -26,7 +27,7 @@ const pages = Array(10)
 
 interface IProps extends RouteComponentProps {}
 
-const TimePeople = ({ history, location }: IProps) => {
+const TimePeople = observer(({ history, location }: IProps) => {
   const { update } = queryString.parse(location.search)
   const orderStore = useContext(OrderStoreContext)
 
@@ -91,7 +92,7 @@ const TimePeople = ({ history, location }: IProps) => {
       </Wrapper>
     </>
   )
-}
+})
 
 export default TimePeople
 
@@ -126,4 +127,6 @@ const StyledPage = styled(animated.div)`
   align-items: center;
   justify-content: center;
   font-size: 60px;
+  color: ${props => props.theme.colors.primary};
+  user-select: none;
 `

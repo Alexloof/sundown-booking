@@ -36,10 +36,21 @@ html {
     border-radius: 5px;
     background: rgba(0,0,0,.25);
     transition: color .2s ease;
-}
+  }
 
   li {
     list-style: none;
+  }
+
+  /* custom style for date-time picker */
+  .datetime-custom {
+    .calendar table thead th {
+      color: ${props => props.theme.colors.primary};
+    }
+
+    .calendar table tbody tr td.selected {
+      background: ${props => props.theme.colors.secondary};
+    }
   }
 }
 

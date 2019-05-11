@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect, useContext, memo } from 'react'
 import styled from 'styled-components'
 import HomeCarousel from './components/HomeCarousel'
 import OrderBox from './components/OrderBox'
@@ -6,7 +6,7 @@ import FindOrder from './components/FindOrder'
 import ContentBox from './components/ContentBox'
 import { OrderStoreContext } from '../../stores/orderStore'
 
-const Home: React.FC = () => {
+const Home: React.FC = memo(() => {
   const { refreshOrder } = useContext(OrderStoreContext)
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const Home: React.FC = () => {
       </Area4>
     </Wrapper>
   )
-}
+})
 
 export default Home
 

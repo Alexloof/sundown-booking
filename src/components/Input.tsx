@@ -5,9 +5,9 @@ export default styled.input`
   justify-content: center;
   align-items: center;
   border-radius: 3px;
-  border: 1px solid gray;
+  border: ${props => `1px solid ${props.theme.colors.grey[1]}`};
   height: 40px;
-  padding: 5px;
+  padding: 5px 10px;
   width: 100%;
   &:focus,
   &:active {

@@ -5,10 +5,11 @@ import Button from '../../components/Button'
 import { OrderStoreContext } from '../../stores/orderStore'
 import { RouteComponentProps, Redirect } from 'react-router-dom'
 import moment from 'moment'
+import { observer } from 'mobx-react-lite'
 
 interface IProps extends RouteComponentProps {}
 
-const Receipt = ({ history }: IProps) => {
+const Receipt = observer(({ history }: IProps) => {
   const {
     email,
     nbrOfPeople,
@@ -64,7 +65,7 @@ const Receipt = ({ history }: IProps) => {
       </Wrapper>
     </>
   )
-}
+})
 
 export default Receipt
 
@@ -89,8 +90,9 @@ const Item = styled.li`
   margin-bottom: 20px;
 `
 const Image = styled.img`
-  height: 65px;
-  width: 65px;
+  height: 100px;
+  width: 100px;
   object-fit: contain;
   margin-right: 20px;
+  border-radius: 10px;
 `
