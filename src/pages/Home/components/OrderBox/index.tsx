@@ -19,7 +19,7 @@ export default withRouter(OrderBox)
 const Wrapper = styled.div`
   height: 100%;
   width: 100%;
-  padding: 100px 60px;
+  padding: 100px 45px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
