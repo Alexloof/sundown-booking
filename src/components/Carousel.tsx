@@ -8,6 +8,7 @@ interface IProps {
   autoSlide?: boolean
   withButtons?: boolean
   onNewActiveIndex?: (index: number) => void
+  startIndex?: number
 }
 
 const Carousel = ({
@@ -15,9 +16,10 @@ const Carousel = ({
   intervalTime = 4000,
   autoSlide,
   onNewActiveIndex,
-  withButtons
+  withButtons,
+  startIndex
 }: IProps) => {
-  const [index, set] = useState(0)
+  const [index, set] = useState(startIndex || 0)
   const [forwards, setForwards] = useState(true)
 
   useEffect(() => {
@@ -62,7 +64,6 @@ const Carousel = ({
       transform: forwards ? 'translate3d(-100%,0,0)' : 'translate3d(100%,0,0)'
     }
   })
-
   return (
     <Wrapper>
       {transitions.map(({ item, props, key }) => {

@@ -26,7 +26,7 @@ class OrderStore {
   public drinks: string[] = []
 
   @observable
-  public time: Moment = null
+  public time: string = ''
 
   @observable
   public nbrOfPeople: number = 1
@@ -41,7 +41,7 @@ class OrderStore {
 
   @action
   public setTime = (time: Moment) => {
-    this.time = time
+    this.time = time.toISOString()
   }
 
   @action
@@ -70,6 +70,17 @@ class OrderStore {
     }
 
     localStorage.setItem(this.email, JSON.stringify(order))
+
+    // API CALL TO SAVE ORDER HERE
+  }
+
+  @action
+  public refreshOrder = () => {
+    this.email = ''
+    this.dish = {} as IDish
+    this.drinks = []
+    this.time = ''
+    this.nbrOfPeople = 1
   }
 
   @action
@@ -82,9 +93,9 @@ class OrderStore {
       this.drinks = drinks
       this.time = time
       this.nbrOfPeople = nbrOfPeople
+
       return true
     } else {
-      console.log('could not find a order for the given email')
       return false
     }
   }
@@ -93,7 +104,7 @@ class OrderStore {
   public fetchDrinks = async () => {
     try {
       const { data } = await axios.get('https://api.punkapi.com/v2/beers')
-      console.log({ data })
+
       this.availableDrinks = data.map((drink: any) => ({
         id: drink.id,
         name: drink.name,

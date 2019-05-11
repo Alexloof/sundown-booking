@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Button from '../../components/Button'
 import { OrderStoreContext } from '../../stores/orderStore'
 import { RouteComponentProps, Redirect } from 'react-router-dom'
+import moment from 'moment'
 
 interface IProps extends RouteComponentProps {}
 
@@ -47,7 +48,7 @@ const Receipt = ({ history }: IProps) => {
           <ItemDetail>
             <strong>Time: </strong>
             <br />
-            {time.format('LLL')}
+            {moment(time).format('LLL')}
           </ItemDetail>
           <ItemDetail>
             <strong>Number of people: </strong>

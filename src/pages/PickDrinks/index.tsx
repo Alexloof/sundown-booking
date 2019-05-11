@@ -5,10 +5,13 @@ import styled from 'styled-components'
 import Button from '../../components/Button'
 import { RouteComponentProps } from 'react-router-dom'
 import Heading from '../../components/Heading'
+import queryString from 'query-string'
 
 interface IProps extends RouteComponentProps {}
 
-const PickDrinks = observer(({ history }: IProps) => {
+const PickDrinks = observer(({ history, location }: IProps) => {
+  const { update } = queryString.parse(location.search)
+
   const { fetchDrinks, availableDrinks, drinks, pickDrink } = useContext(
     OrderStoreContext
   )
@@ -16,6 +19,14 @@ const PickDrinks = observer(({ history }: IProps) => {
   useEffect(() => {
     fetchDrinks()
   }, [])
+
+  const handleNext = () => {
+    if (drinks.length > 0) {
+      history.push(`/time-people${update ? '?update=true' : ''}`)
+    } else {
+      // TODO: notification
+    }
+  }
 
   return (
     <>
@@ -38,7 +49,7 @@ const PickDrinks = observer(({ history }: IProps) => {
         </DrinksList>
         <ComingUpBox>
           <h3>Pick date and number of people next</h3>
-          <Button onClick={() => history.push('/time-people')}>Next</Button>
+          <Button onClick={handleNext}>Next</Button>
         </ComingUpBox>
       </Wrapper>
     </>

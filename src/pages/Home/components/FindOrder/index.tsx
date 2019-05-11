@@ -1,14 +1,28 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import styled from 'styled-components'
 import Button from '../../../../components/Button'
 import Input from '../../../../components/Input'
 import InputLabel from '../../../../components/InputLabel'
+import { OrderStoreContext } from '../../../../stores/orderStore'
+import { withRouter, RouteComponentProps } from 'react-router-dom'
 
-const FindOrder = () => {
+interface IProps extends RouteComponentProps {}
+
+const FindOrder = ({ history }: IProps) => {
+  const { hydrateOrder } = useContext(OrderStoreContext)
+
   const [email, setEmail] = useState('')
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
+    const orderExist = hydrateOrder(email)
+    if (orderExist) {
+      history.push('/pick-dish?update=true')
+    } else {
+      console.log('order does not exist')
+      setEmail('')
+    }
   }
 
   return (
@@ -29,7 +43,7 @@ const FindOrder = () => {
   )
 }
 
-export default FindOrder
+export default withRouter(FindOrder)
 
 const Wrapper = styled.div`
   height: 100%;

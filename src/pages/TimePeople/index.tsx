@@ -13,6 +13,8 @@ import Button from '../../components/Button'
 import InputLabel from '../../components/InputLabel'
 import { OrderStoreContext } from '../../stores/orderStore'
 import { RouteComponentProps } from 'react-router'
+import queryString from 'query-string'
+import validateTime from '../../utils/validateTime'
 
 const pages = Array(10)
   .fill(0)
@@ -22,16 +24,16 @@ const pages = Array(10)
     )
   })
 
-const validateTime = (time: Moment): boolean => {
-  return true
-}
-
 interface IProps extends RouteComponentProps {}
 
-const TimePeople = ({ history }: IProps) => {
+const TimePeople = ({ history, location }: IProps) => {
+  const { update } = queryString.parse(location.search)
   const orderStore = useContext(OrderStoreContext)
-  const [time, setTime] = useState(moment())
-  const [email, setEmail] = useState('')
+
+  const [time, setTime] = useState(
+    orderStore.time ? moment(orderStore.time) : moment()
+  )
+  const [email, setEmail] = useState(orderStore.email || '')
 
   const onNewNumberOfPeople = (index: number) => {
     orderStore.setPeople(index + 1)
@@ -39,8 +41,8 @@ const TimePeople = ({ history }: IProps) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const isTimeCorrect = validateTime(time)
-    if (isTimeCorrect) {
+    const isTimeValid = validateTime(time)
+    if (isTimeValid) {
       orderStore.setTime(time)
       orderStore.setEmail(email)
       orderStore.saveOrder()
@@ -70,6 +72,7 @@ const TimePeople = ({ history }: IProps) => {
               pages={pages}
               onNewActiveIndex={onNewNumberOfPeople}
               withButtons
+              startIndex={orderStore.nbrOfPeople - 1}
             />
           </PeopleWrapper>
           <form onSubmit={handleSubmit}>
@@ -80,7 +83,9 @@ const TimePeople = ({ history }: IProps) => {
               type="email"
               placeholder="Enter an email for your order..."
             />
-            <Button style={{ marginTop: '40px' }}>Order</Button>
+            <Button style={{ marginTop: '40px' }}>
+              {update ? 'Update order' : 'Order'}
+            </Button>
           </form>
         </SectionRight>
       </Wrapper>

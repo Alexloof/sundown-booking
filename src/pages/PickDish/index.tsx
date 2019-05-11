@@ -5,15 +5,17 @@ import { observer } from 'mobx-react-lite'
 import Button from '../../components/Button'
 import { RouteComponentProps } from 'react-router-dom'
 import Heading from '../../components/Heading'
+import queryString from 'query-string'
 
 interface IProps extends RouteComponentProps {}
 
-const PickDish = observer(({ history }: IProps) => {
+const PickDish = observer(({ history, location }: IProps) => {
+  const { update } = queryString.parse(location.search)
+
   const { generateDish, dish } = useContext(OrderStoreContext)
-  console.log(dish.img)
 
   useEffect(() => {
-    generateDish()
+    !update && generateDish()
   }, [])
 
   return (
@@ -28,7 +30,13 @@ const PickDish = observer(({ history }: IProps) => {
         </FoodWrapper>
         <ComingUpBox>
           <h3>Pick some drinks next</h3>
-          <Button onClick={() => history.push('/pick-drinks')}>Next</Button>
+          <Button
+            onClick={() =>
+              history.push(`/pick-drinks${update ? '?update=true' : ''}`)
+            }
+          >
+            Next
+          </Button>
         </ComingUpBox>
       </Wrapper>
     </>
