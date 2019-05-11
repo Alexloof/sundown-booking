@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Heading from '../../components/Heading'
 import moment, { Moment } from 'moment'
 
@@ -8,8 +8,13 @@ import 'rc-datetime-picker/dist/picker.min.css'
 import styled from 'styled-components'
 import Carousel from '../../components/Carousel'
 import { AnimatedValue, animated } from 'react-spring'
+import Input from '../../components/Input'
+import Button from '../../components/Button'
+import InputLabel from '../../components/InputLabel'
+import { OrderStoreContext } from '../../stores/orderStore'
+import { RouteComponentProps } from 'react-router'
 
-const pagess = Array(10)
+const pages = Array(10)
   .fill(0)
   .map((_, index) => {
     return ({ style }: AnimatedValue<any>) => (
@@ -17,26 +22,66 @@ const pagess = Array(10)
     )
   })
 
-const TimePeople = () => {
+const validateTime = (time: Moment): boolean => {
+  return true
+}
+
+interface IProps extends RouteComponentProps {}
+
+const TimePeople = ({ history }: IProps) => {
+  const orderStore = useContext(OrderStoreContext)
   const [time, setTime] = useState(moment())
+  const [email, setEmail] = useState('')
+
+  const onNewNumberOfPeople = (index: number) => {
+    orderStore.setPeople(index + 1)
+  }
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const isTimeCorrect = validateTime(time)
+    if (isTimeCorrect) {
+      orderStore.setTime(time)
+      orderStore.setEmail(email)
+      orderStore.saveOrder()
+      history.push('/receipt')
+    } else {
+      console.log('check time')
+    }
+  }
+
   return (
     <>
       <Heading>Pick time and number of people</Heading>
       <Wrapper>
-        <SectionLeft>
-          <strong>Time</strong>
-          <p>{time.format('LLL')}</p>
+        <div>
+          <SubHeading>Time</SubHeading>
+          <TimeLabel>{time.format('LLL')}</TimeLabel>
           <DatetimePicker
             className="datetime-custom"
             moment={time}
             onChange={(time: Moment) => setTime(time)}
           />
-        </SectionLeft>
+        </div>
         <SectionRight>
           <PeopleWrapper>
-            <h3>Number of people</h3>
-            <Carousel pages={pagess} />
+            <SubHeading>Number of people</SubHeading>
+            <Carousel
+              pages={pages}
+              onNewActiveIndex={onNewNumberOfPeople}
+              withButtons
+            />
           </PeopleWrapper>
+          <form onSubmit={handleSubmit}>
+            <InputLabel>Email</InputLabel>
+            <Input
+              value={email}
+              onChange={e => setEmail(e.currentTarget.value)}
+              type="email"
+              placeholder="Enter an email for your order..."
+            />
+            <Button style={{ marginTop: '40px' }}>Order</Button>
+          </form>
         </SectionRight>
       </Wrapper>
     </>
@@ -50,13 +95,22 @@ const Wrapper = styled.div`
   display: flex;
 `
 
-const SectionLeft = styled.div``
-const SectionRight = styled.div`
-  margin-left: 100px;
+const SubHeading = styled.h3`
+  margin-bottom: 30px;
 `
+
+const TimeLabel = styled.p`
+  margin-bottom: 15px;
+`
+
+const SectionRight = styled.div`
+  margin-left: 20%;
+`
+
 const PeopleWrapper = styled.div`
-  width: 400px;
-  height: 300px;
+  width: 240px;
+  height: 100px;
+  margin-bottom: 150px;
 `
 
 const StyledPage = styled(animated.div)`
