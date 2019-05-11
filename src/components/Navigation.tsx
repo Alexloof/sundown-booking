@@ -15,10 +15,10 @@ const Navigation = ({ history }: IProps) => {
       />
       <Header onClick={() => history.push('/')}>Sundown Booking</Header>
       <List>
-        <ListItem>Restauranter</ListItem>
-        <ListItem>Produkter</ListItem>
-        <ListItem>Nyhedsbrev</ListItem>
-        <ListItem>Kontakt</ListItem>
+        <ListItem>Restaurants</ListItem>
+        <ListItem>Products</ListItem>
+        <ListItem>Newsletter</ListItem>
+        <ListItem>Contact</ListItem>
       </List>
     </Wrapper>
   )

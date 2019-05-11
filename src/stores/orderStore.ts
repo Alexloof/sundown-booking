@@ -1,4 +1,4 @@
-import { observable, action } from 'mobx'
+import { observable, action, computed } from 'mobx'
 import React from 'react'
 import axios from 'axios'
 import { Moment } from 'moment'
@@ -52,6 +52,12 @@ class OrderStore {
   @action
   public pickDrink = (id: string) => {
     this.drinks.push(id)
+  }
+
+  public getDrinkDetails = (drinkId: string) => {
+    return computed(() => {
+      return this.availableDrinks.find(drink => drink.id === drinkId)
+    }).get()
   }
 
   public saveOrder = () => {
