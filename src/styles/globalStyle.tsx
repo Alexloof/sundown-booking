@@ -27,8 +27,16 @@ html {
   }
 
   body ::-webkit-scrollbar-track {
-    background: transparent;
+    background: rgba(0,0,0,.1);
+    border-radius: 0;
   }
+
+  body ::-webkit-scrollbar-thumb {
+    cursor: pointer;
+    border-radius: 5px;
+    background: rgba(0,0,0,.25);
+    transition: color .2s ease;
+}
 
   li {
     list-style: none;

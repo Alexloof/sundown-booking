@@ -10,10 +10,14 @@ export default styled.button`
   color: white;
   border: 0;
   border-radius: 7px;
-  font-size: 16px;
+  font-size: 15px;
   text-transform: uppercase;
   font-weight: bold;
   letter-spacing: 1px;
   cursor: pointer;
   width: 240px;
+  &:focus,
+  &:active {
+    outline: 0;
+  }
 `

@@ -1,29 +1,35 @@
 import React from 'react'
 import styled from 'styled-components'
-import Carousel from './components/Carousel'
+import HomeCarousel from './components/HomeCarousel'
 import OrderBox from './components/OrderBox'
+import FindOrder from './components/FindOrder'
+import ContentBox from './components/ContentBox'
 
 const Home: React.FC = () => {
   return (
     <Wrapper>
       <Area1>
-        <Carousel />
+        <HomeCarousel />
       </Area1>
       <Area2>
         <OrderBox />
       </Area2>
-      <Area3 />
-      <Area4 />
+      <Area3>
+        <FindOrder />
+      </Area3>
+      <Area4>
+        <ContentBox />
+      </Area4>
     </Wrapper>
   )
 }
 
 export default Home
 
-const Wrapper = styled.main`
+const Wrapper = styled.div`
   display: grid;
   grid-gap: 50px;
-  grid-template-columns: repeat(12, [col] auto);
+  grid-template-columns: repeat(12, [col] 1fr);
   grid-template-rows: repeat(2, [row] 400px);
 `
 
