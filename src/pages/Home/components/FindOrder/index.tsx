@@ -6,6 +6,7 @@ import InputLabel from '../../../../components/InputLabel'
 import { OrderStoreContext } from '../../../../stores/orderStore'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import { ArrowForward } from 'styled-icons/material/ArrowForward/ArrowForward'
 
 interface IProps extends RouteComponentProps {}
 
@@ -41,7 +42,10 @@ const FindOrder = memo(({ history }: IProps) => {
           placeholder="Enter an email to find your order..."
           style={{ marginBottom: '20px' }}
         />
-        <Button>Find</Button>
+        <Button>
+          Find
+          <ArrowForward />
+        </Button>
       </form>
     </Wrapper>
   )

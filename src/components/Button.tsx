@@ -16,11 +16,24 @@ export default styled.button`
   cursor: pointer;
   width: 240px;
   transition: 0.25s background ease;
+  position: relative;
   &:focus,
   &:active {
     outline: 0;
   }
   &:hover {
     background: ${props => props.theme.colors.primary}cc;
+    svg {
+      opacity: 1;
+      left: 70%;
+      height: 25px;
+    }
+  }
+  svg {
+    height: 15px;
+    position: absolute;
+    transition: 0.2s all ease;
+    opacity: 0;
+    left: 60%;
   }
 `

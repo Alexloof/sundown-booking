@@ -2,6 +2,7 @@ import React, { memo } from 'react'
 import styled from 'styled-components'
 import Button from '../../../../components/Button'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
+import { ArrowForward } from 'styled-icons/material/ArrowForward'
 
 interface IProps extends RouteComponentProps {}
 
@@ -9,7 +10,10 @@ const OrderBox = memo(({ history }: IProps) => {
   return (
     <Wrapper>
       <h2>Start your order now!</h2>
-      <Button onClick={() => history.push('/pick-dish')}>Order</Button>
+      <Button onClick={() => history.push('/pick-dish')}>
+        Order
+        <ArrowForward />
+      </Button>
     </Wrapper>
   )
 })

@@ -22,6 +22,7 @@ html {
   font-family: 'Helvetica Neue';
   font-size: 16px;
   margin-left: calc(100vw - 100%); 
+  color: ${props => props.theme.colors.grey[6]};
 
   body ::-webkit-scrollbar {
     width: 7px;

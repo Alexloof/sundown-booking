@@ -8,6 +8,7 @@ import Heading from '../../components/Heading'
 import queryString from 'query-string'
 import DrinksList from './DrinksList'
 import { toast } from 'react-toastify'
+import { ArrowForward } from 'styled-icons/material/ArrowForward/ArrowForward'
 
 interface IProps extends RouteComponentProps {}
 
@@ -37,7 +38,10 @@ const PickDrinks = observer(({ history, location }: IProps) => {
         <DrinksList availableDrinks={availableDrinks} />
         <ComingUpBox>
           <h3>Pick date and number of people next</h3>
-          <Button onClick={handleNext}>Next</Button>
+          <Button onClick={handleNext}>
+            Next
+            <ArrowForward />
+          </Button>
         </ComingUpBox>
       </Wrapper>
     </>

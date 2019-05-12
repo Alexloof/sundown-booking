@@ -6,6 +6,7 @@ import Button from '../../components/Button'
 import { RouteComponentProps } from 'react-router-dom'
 import Heading from '../../components/Heading'
 import queryString from 'query-string'
+import { ArrowForward } from 'styled-icons/material/ArrowForward'
 
 interface IProps extends RouteComponentProps {}
 
@@ -41,6 +42,7 @@ const PickDish = observer(({ history, location }: IProps) => {
             }
           >
             Next
+            <ArrowForward />
           </Button>
         </ComingUpBox>
       </Wrapper>

@@ -27,7 +27,8 @@
     "strict": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true
+    "noEmit": true,
+    "plugins": [{ "name": "typescript-tslint-plugin" }]
   },
   "include": ["src"]
 }
