@@ -7,6 +7,7 @@ import { RouteComponentProps } from 'react-router-dom'
 import moment from 'moment'
 import { observer } from 'mobx-react-lite'
 import { toast } from 'react-toastify'
+import Checkmark from '../../components/Checkmark'
 
 interface IProps extends RouteComponentProps {}
 
@@ -35,55 +36,67 @@ const Receipt = observer(({ history }: IProps) => {
       <Button onClick={() => history.push('/')} style={{ marginLeft: 'auto' }}>
         Back to Home
       </Button>
-      <Heading>Receipt</Heading>
-      <Wrapper>
-        <List>
-          <Item>
-            <Image src={dish.img} />
-            {dish.title}
-          </Item>
-          {drinks.map(drinkId => {
-            const detailedDrink = getDrinkDetails(drinkId)
-            return (
-              <Item key={detailedDrink.id}>
-                <Image src={detailedDrink.img} />
-                {detailedDrink.name}
-              </Item>
-            )
-          })}
-        </List>
-        <Details>
-          <ItemDetail>
-            <strong>Time: </strong>
-            <br />
-            {moment(time).format('LLL')}
-          </ItemDetail>
-          <ItemDetail>
-            <strong>Number of people: </strong>
-            <br />
-            {nbrOfPeople}
-          </ItemDetail>
-          <ItemDetail>
-            <strong>Email: </strong>
-            <br />
-            {email}
-          </ItemDetail>
-        </Details>
-      </Wrapper>
+      <ReceiptWrapper>
+        <Heading>Thanks for your order!</Heading>
+        <Checkmark />
+        <ItemsWrapper>
+          <List>
+            <Item>
+              <Image src={dish.img} />
+              {dish.title}
+            </Item>
+            {drinks.map(drinkId => {
+              const detailedDrink = getDrinkDetails(drinkId)
+              return (
+                <Item key={detailedDrink.id}>
+                  <Image src={detailedDrink.img} />
+                  {detailedDrink.name}
+                </Item>
+              )
+            })}
+          </List>
+          <Details>
+            <ItemDetail>
+              <strong>Time: </strong>
+              <br />
+              {moment(time).format('LLL')}
+            </ItemDetail>
+            <ItemDetail>
+              <strong>Number of people: </strong>
+              <br />
+              {nbrOfPeople}
+            </ItemDetail>
+            <ItemDetail>
+              <strong>Email: </strong>
+              <br />
+              {email}
+            </ItemDetail>
+          </Details>
+        </ItemsWrapper>
+      </ReceiptWrapper>
     </>
   )
 })
 
 export default Receipt
 
-const Wrapper = styled.div`
+const ReceiptWrapper = styled.div`
+  width: 650px;
+  margin: 0 auto;
+  padding: 20px;
   display: flex;
-  margin-top: 40px;
+  flex-direction: column;
+  align-items: center;
 `
 
-const List = styled.ul`
-  width: 60%;
+const ItemsWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+  width: 100%;
 `
+
+const List = styled.ul``
 
 const Details = styled.div``
 

@@ -1,10 +1,6 @@
 import React, { useState, useContext } from 'react'
 import Heading from '../../components/Heading'
 import moment, { Moment } from 'moment'
-
-// @ts-ignore
-import { DatetimePicker } from 'rc-datetime-picker'
-import 'rc-datetime-picker/dist/picker.min.css'
 import styled from 'styled-components'
 import Carousel from '../../components/Carousel'
 import { AnimatedValue, animated } from 'react-spring'
@@ -17,6 +13,10 @@ import queryString from 'query-string'
 import validateTime from '../../utils/validateTime'
 import { observer } from 'mobx-react-lite'
 import { toast } from 'react-toastify'
+
+// @ts-ignore
+import { DatetimePicker } from 'rc-datetime-picker'
+import 'rc-datetime-picker/dist/picker.min.css'
 
 // generates "nbr of people" pages for the carousel
 const pages = Array(10)

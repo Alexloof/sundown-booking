@@ -18,7 +18,6 @@ const Routes = () => {
     enter: { opacity: 1, transform: 'translate3d(0px, 0px, 0px)' },
     leave: {
       opacity: 0,
-      transform: 'translate3d(0px, 50px, 0px)',
       position: 'absolute'
     }
   })
@@ -26,14 +25,7 @@ const Routes = () => {
   return (
     <RelativeContainer>
       {transitions.map(({ item, props, key }) => (
-        <animated.div
-          style={{
-            ...props,
-            height: '100%',
-            width: '100%'
-          }}
-          key={key}
-        >
+        <AnimatedWrapper style={{ ...props }} key={key}>
           <Switch location={item}>
             <Route exact path="/" component={Home} />
             <Route exact path="/pick-dish" component={PickDish} />
@@ -41,7 +33,7 @@ const Routes = () => {
             <Route exact path="/time-people" component={TimePeople} />
             <Route exact path="/receipt" component={Receipt} />
           </Switch>
-        </animated.div>
+        </AnimatedWrapper>
       ))}
     </RelativeContainer>
   )
@@ -53,4 +45,9 @@ const RelativeContainer = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
+`
+
+const AnimatedWrapper = styled(animated.div)`
+  height: 100%;
+  width: 100%;
 `
